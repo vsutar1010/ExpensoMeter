@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpensoMeter - Neumorphic Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div class="login-screen" id="loginScreen">
+            <div class="login-card">
+                <div class="login-illustration">
+                    <img src="https://raw.githubusercontent.com/undraw/undraw/master/static/undraw_wallet_aym5.svg" alt="Wallet illustration" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'" />
+                </div>
+                <h2>Welcome</h2>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="loginEmail" placeholder="Email" required autocomplete="username" value="" aria-label="Email address">
+                        <label class="animated-placeholder">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password" value="" aria-label="Password (minimum 8 characters)">
+                        <span class="input-icon input-eye" id="loginEye"><i class="fas fa-eye"></i></span>
+                        <label class="animated-placeholder">Password</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Login</button>
+                    <button type="button" class="btn-google"><i class="fab fa-google"></i> Login with Google</button>
+                </form>
+                <p class="signup-link">Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+                <button id="themeToggleBtnLogin" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="signup-card" id="signupCard" style="display: none;">
+                <div class="login-illustration">
+                    <img src="https://raw.githubusercontent.com/undraw/undraw/master/static/undraw_wallet_aym5.svg" alt="Wallet illustration" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'" />
+                </div>
+                <h2>Sign Up</h2>
+                <form id="signupForm">
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-user"></i></span>
+                        <input type="text" id="signupName" placeholder="Full Name" required autocomplete="name" value="" aria-label="Full name">
+                        <label class="animated-placeholder">Full Name</label>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="signupEmail" placeholder="Email" required autocomplete="username" value="" aria-label="Email address">
+                        <label class="animated-placeholder">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="signupPassword" placeholder="Password" required autocomplete="new-password" value="" aria-label="Password (minimum 8 characters)">
+                        <span class="input-icon input-eye" id="signupEye"><i class="fas fa-eye"></i></span>
+                        <label class="animated-placeholder">Password</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                    <button type="button" class="btn-google"><i class="fab fa-google"></i> Sign up with Google</button>
+                </form>
+                <p class="login-link">Already have an account? <a href="#" id="showLogin">Login</a></p>
+                <button id="themeToggleBtnSignup" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard" id="dashboard" style="display: none;">
+            <nav class="navbar">
+                <div class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Stats</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </div>
+                <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+
+            <main class="main-content">
+                <div class="summary-cards">
+                    <div class="card">
+                        <h3>Today's Expenses</h3>
+                        <p class="amount" id="todaysExpenses">$0.00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Expenses</h3>
+                        <p class="amount" id="totalExpenses">$0.00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Daily Limit</h3>
+                        <p class="amount" id="dailyLimit">$100.00</p>
+                        <p class="remaining-budget" id="remainingBudget">Remaining: $100.00</p>
+                        <button class="btn-secondary" id="changeLimitBtn">
+                            <i class="fas fa-edit"></i> Change Limit
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Add Logout Button here -->
+                <button class="btn-primary" id="logoutBtn" style="margin-top: 20px;">Logout</button>
+
+                <div class="recent-transactions">
+                    <h2>Recent Transactions</h2>
+                    <div class="filter-bar neumorphic">
+                        <input type="text" id="searchInput" class="input-group" placeholder="Search by name...">
+                        <input type="date" id="startDate" class="input-group" placeholder="Start date">
+                        <input type="date" id="endDate" class="input-group" placeholder="End date">
+                        <select id="categoryFilter" class="input-group">
+                            <option value="">All Categories</option>
+                            <option value="Food">Food</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="number" id="minAmount" class="input-group" placeholder="Min amount" min="0">
+                        <input type="number" id="maxAmount" class="input-group" placeholder="Max amount" min="0">
+                    </div>
+                    <div class="transaction-list" id="expenseList">
+                        <!-- Transactions will be added dynamically -->
+                    </div>
+                </div>
+            </main>
+
+            <!-- Add Expense Form -->
+            <div class="add-expense-form" id="addExpenseForm" style="display: none;">
+                <div class="form-card">
+                    <h2>Add New Expense</h2>
+                    <form id="expenseForm">
+                        <div class="input-group">
+                            <input type="text" placeholder="Item Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" placeholder="Amount" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="date" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Expense</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Floating Action Button -->
+            <button class="fab" id="addExpenseBtn">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- NEW: Spinner for loading states -->
+    <div id="globalSpinner" class="spinner-overlay" style="display:none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- NEW: Empty state illustration and message (hidden by default, shown by JS) -->
+    <div id="emptyState" class="empty-state" style="display:none;">
+        <i class="fas fa-wallet"></i>
+        <p>No transactions yet</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
